@@ -44,6 +44,8 @@
                 ctx.moveTo(55,130-x);
                 ctx.bezierCurveTo(75,170,125,170,145,130-x);
                 //ctx.arc(100,50,90-x,Math.PI/3,2*Math.PI/3,false);
+                if(x>6)
+                    ctx.closePath();
                 ctx.stroke();
                 
             }
