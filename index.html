@@ -1,10 +1,12 @@
 <html>
   <head>
-    <title>Canvas tutorial</title>
+    <title>HCI</title>
     <script type="text/javascript">
-        var x=5;
-        function draw(flg){
-            alert(x);
+        function draw(){
+            var element=document.getElementById("face");
+            var NL=element.face;
+            var flg=NL.value;
+            var x=Number(document.getElementById("range").value);    
             var can = document.getElementById("canvas");
             var ctx = can.getContext("2d");
             ctx.clearRect(0,0,200,200);
@@ -30,18 +32,18 @@
             function egao(){
                 ctx.beginPath();
                 ctx.moveTo(55,80);
-                //ctx.arc(130,80,20,0,Math.PI*2,false);
-                ctx.lineTo(75,70)
+                ctx.lineTo(75,75-x);
                 ctx.lineTo(95,80);
                 ctx.stroke();
                 ctx.beginPath();
                 ctx.moveTo(145,80);
-                ctx.lineTo(125,70);
+                ctx.lineTo(125,75-x);
                 ctx.lineTo(105,80);
-                //ctx.arc(70,80,20,0,Math.PI*2,false);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.arc(100,50,100,Math.PI/3,2*Math.PI/3,false);
+                ctx.moveTo(55,130-x);
+                ctx.bezierCurveTo(75,170,125,170,145,130-x);
+                //ctx.arc(100,50,90-x,Math.PI/3,2*Math.PI/3,false);
                 ctx.stroke();
                 
             }
@@ -53,73 +55,91 @@
                 ctx.arc(70,80,15,0,Math.PI*2,false);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.arc(100,150,20,0,Math.PI*2,false);
+                ctx.arc(100,150,15+x,0,Math.PI*2,false);
                 ctx.stroke();
             }
             function naki(){
                 ctx.beginPath();
-                ctx.moveTo(55,80);
-                ctx.lineTo(80,70);
+                ctx.moveTo(55,75+x/2);
+                ctx.lineTo(80+x/2,70-x/2);
                 ctx.stroke();                
                 ctx.beginPath();
-                ctx.moveTo(145,80);
-                ctx.lineTo(120,70);
+                ctx.moveTo(145,75+x/2);
+                ctx.lineTo(120-x/2,70-x/2);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.arc(100,225,90,10*Math.PI/6,8*Math.PI/6,true);
+                ctx.moveTo(55,140+x);
+                ctx.bezierCurveTo(70,110,130,110,145,140+x);
                 ctx.stroke();          
             }
             function ikari(){
                 ctx.beginPath();
-                ctx.moveTo(55,70);
-                ctx.lineTo(80,80);
+                ctx.moveTo(55,70-x/2);
+                ctx.lineTo(80,80+x/2);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.moveTo(145,70);
-                ctx.lineTo(120,80);
+                ctx.moveTo(145,70-x/2);
+                ctx.lineTo(120,80+x/2);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.arc(100,225,90,10*Math.PI/6,8*Math.PI/6,true);
+                ctx.moveTo(55,140+x);
+                ctx.bezierCurveTo(70,110,130,110,145,140+x);
                 ctx.stroke();                
             }
             circle();
             switch(flg){
-                case 0:
+                case "真顔":
                     magao();
                     break;
-                case 1:
+                case "笑顔":
                     egao();
                     break;
-                case 2:
+                case "驚き":
                     odoroki();
                     break;
-                case 3:
+                case "泣き顔":
                     naki();
                     break;
-                case 4:
+                case "怒り":
                     ikari();
                     break;
             }
         }
         function getval(){
             x=document.getElementById("range").value;
+            console.log(x);
+        }
+        function getdata(){
+            var element=document.getElementById("face");
+            var NL=element.face;
         }
     </script>
     <style type="text/css">
       canvas { border: 1px solid #999; }
     </style>
   </head>
-  <body onload="draw(0);">
-    <p><canvas id="canvas" width="200" height="200"></canvas></p>
+  <body onload="draw();">
     <p>
-    <input type="radio" name="face" value="真顔" onclick="draw(0);"/>真顔
-    <input type="radio" name="face" value="笑顔" onclick="draw(1);"/>笑顔
-    <input type="radio" name="face" value="驚き" onclick="draw(2);"/>驚き
-    <input type="radio" name="face" value="泣き顔" onclick="draw(3);"/>泣き顔
-    <input type="radio" name="face" value="怒り" onclick="draw(4);"/>怒り
-    <p/>
+        実験内容について説明します.<br>
+        ボタンをクリックすると表情が選べます．<br>その下のスライドバーを左右に動かすと感情の大きさを選ぶことができます．<br>
+        入力，表示の確認が終わったらアンケートの協力をお願いします．<br>
+        評価が良ければいいというものではないので，<br>良かった点・改善点などあれば素直に書いていただいて構いません．<br>
+        よろしくお願いします．<br>
+        アンケートのリンクは<a href="https://goo.gl/forms/yc3itNJJm0gK9Nc02" target="_blank">こちら<a/>です．<br>
+    </p>
+    <p><canvas id="canvas" width="200" height="200"></canvas></p>
+    <p><form id="face">
+    <input type="radio" name="face" value="真顔" onclick="draw()" checked="checked"/>真顔
+    <input type="radio" name="face" value="笑顔" onclick="draw()"/>
+    笑顔
+    <input type="radio" name="face" value="驚き" onclick="draw()"/>
+    驚き
+    <input type="radio" name="face" value="泣き顔" onclick="draw()"/>泣き顔
+    <input type="radio" name="face" value="怒り" onclick="draw()"/>
+    怒り
+    </form><p/>
     <p>
     感情<br/>
-    小<input type="range" id="range" min="0" max="10" value="5" onchange="getval();">大</p>
+    小<input type="range" id="range" min=0 max=10 value=5 onchange="draw()">大</p>
   </body>
 </html>
