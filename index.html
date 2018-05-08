@@ -1,6 +1,125 @@
-<!DOCTYPE html>
 <html>
-<body>
-<h1>Hello World</h1>
-</body>
+  <head>
+    <title>Canvas tutorial</title>
+    <script type="text/javascript">
+        var x=5;
+        function draw(flg){
+            alert(x);
+            var can = document.getElementById("canvas");
+            var ctx = can.getContext("2d");
+            ctx.clearRect(0,0,200,200);
+            function circle(){
+                ctx.beginPath();
+                ctx.arc(100,100,80,0,Math.PI*2,false);
+                ctx.stroke();
+            }
+            function magao(){
+                ctx.beginPath();
+                ctx.arc(130,80,20,0,Math.PI*2,false);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(70,80,20,0,Math.PI*2,false);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.moveTo(70,150);
+                ctx.lineTo(130,150);
+                ctx.closePath();
+                ctx.stroke();
+            }
+            function egao(){
+                ctx.beginPath();
+                ctx.moveTo(55,80);
+                //ctx.arc(130,80,20,0,Math.PI*2,false);
+                ctx.lineTo(75,70)
+                ctx.lineTo(95,80);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(145,80);
+                ctx.lineTo(125,70);
+                ctx.lineTo(105,80);
+                //ctx.arc(70,80,20,0,Math.PI*2,false);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(100,50,100,Math.PI/3,2*Math.PI/3,false);
+                ctx.stroke();
+                
+            }
+            function odoroki(){
+                ctx.beginPath();
+                ctx.arc(130,80,15,0,Math.PI*2,false);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(70,80,15,0,Math.PI*2,false);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(100,150,20,0,Math.PI*2,false);
+                ctx.stroke();
+            }
+            function naki(){
+                ctx.beginPath();
+                ctx.moveTo(55,80);
+                ctx.lineTo(80,70);
+                ctx.stroke();                
+                ctx.beginPath();
+                ctx.moveTo(145,80);
+                ctx.lineTo(120,70);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(100,225,90,10*Math.PI/6,8*Math.PI/6,true);
+                ctx.stroke();          
+            }
+            function ikari(){
+                ctx.beginPath();
+                ctx.moveTo(55,70);
+                ctx.lineTo(80,80);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(145,70);
+                ctx.lineTo(120,80);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(100,225,90,10*Math.PI/6,8*Math.PI/6,true);
+                ctx.stroke();                
+            }
+            circle();
+            switch(flg){
+                case 0:
+                    magao();
+                    break;
+                case 1:
+                    egao();
+                    break;
+                case 2:
+                    odoroki();
+                    break;
+                case 3:
+                    naki();
+                    break;
+                case 4:
+                    ikari();
+                    break;
+            }
+        }
+        function getval(){
+            x=document.getElementById("range").value;
+        }
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid #999; }
+    </style>
+  </head>
+  <body onload="draw(0);">
+    <p><canvas id="canvas" width="200" height="200"></canvas></p>
+    <p>
+    <input type="radio" name="face" value="真顔" onclick="draw(0);"/>真顔
+    <input type="radio" name="face" value="笑顔" onclick="draw(1);"/>笑顔
+    <input type="radio" name="face" value="驚き" onclick="draw(2);"/>驚き
+    <input type="radio" name="face" value="泣き顔" onclick="draw(3);"/>泣き顔
+    <input type="radio" name="face" value="怒り" onclick="draw(4);"/>怒り
+    <p/>
+    <p>
+    感情<br/>
+    小<input type="range" id="range" min="0" max="10" value="5" onchange="getval();">大</p>
+  </body>
 </html>
