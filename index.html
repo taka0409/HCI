@@ -122,7 +122,9 @@
   <body onload="draw();">
     <p>
         実験内容について説明します.<br>
+        実験のテーマは「伝えたい情報を簡単に，わかりやすく伝えられるか」です．<br>
         ボタンをクリックすると表情が選べます．<br>その下のスライドバーを左右に動かすと感情の大きさを選ぶことができます．<br>
+        (スライドバーはタップするとやりやすいです)<br>
         入力，表示の確認が終わったらアンケートの協力をお願いします．<br>
         評価が良ければいいというものではないので，<br>良かった点・改善点などあれば素直に書いていただいて構いません．<br>
         よろしくお願いします．<br>
@@ -130,12 +132,14 @@
     </p>
     <p><canvas id="canvas" width="200" height="200"></canvas></p>
     <p><form id="face">
-    <input type="radio" name="face" value="真顔" onclick="draw()" checked="checked"/>真顔
+    <input type="radio" name="face" value="真顔" onclick="draw()" checked="checked"/>
+    真顔
     <input type="radio" name="face" value="笑顔" onclick="draw()"/>
     笑顔
     <input type="radio" name="face" value="驚き" onclick="draw()"/>
     驚き
-    <input type="radio" name="face" value="泣き顔" onclick="draw()"/>泣き顔
+    <input type="radio" name="face" value="泣き顔" onclick="draw()"/>
+    泣き顔
     <input type="radio" name="face" value="怒り" onclick="draw()"/>
     怒り
     </form><p/>
